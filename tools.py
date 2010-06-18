@@ -2,23 +2,45 @@ def ponComa( numero ):
     '''Regresa numero como cadena con comas.
     
     numero es un entero
-    no maneja signo ni punto decimal.'''
+   ya maneja punto decimal
+   pero signo todavia no.'''
 
-    cadenaNumero = str( numero )
+    entero, punto, decimales  = str( numero ).partition('.')
+     
+    cadenaNumero = str(entero)
     
     indiceCadena = len( cadenaNumero )
     
-    while indiceCadena > 3:
+    if cadenaNumero[0:1] == '-':
     
-        indiceCadena = indiceCadena - 3
+        signo = '-'
         
-        cadenaNumero = cadenaNumero[ :indiceCadena ] +  ',' + cadenaNumero[ indiceCadena: ]
+        cadenaNumero = cadenaNumero[1:-1]
         
-    return cadenaNumero
+        indiceCadena = indiceCadena-2
+        
+    else:
+        
+        signo = ' '
+        
+    if indiceCadena < 3:
+    
+        print ( numero )
+        
+    else:
+    
+        while indiceCadena > 3:
+    
+            indiceCadena = indiceCadena - 3
+        
+            cadenaNumero = cadenaNumero[ :indiceCadena ] +  ',' + cadenaNumero[ indiceCadena: ]
+        
+        return  signo + cadenaNumero + punto + decimales        
+    
 
 if __name__ == '__main__':
 
-    for datoDePrueba in [ '1000' ]:
+    for datoDePrueba in [ '-123', '1234', '-123456789', '-123456789.11111', '-99999999999999999.99999999999999' ]:
     
         print ( datoDePrueba , ponComa( datoDePrueba ) )
 
